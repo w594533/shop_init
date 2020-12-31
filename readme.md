@@ -13,6 +13,13 @@ DB_USERNAME=Your database username
 DB_PASSWORD=Your database password
 ```
 
+## 前端配置
+[首先参考链接](https://learnku.com/articles/13277/in-learning-lessons-there-are-always-craters-recording-solutions)
+
+上面配置好之后，执行
+- npm run watch-poll 本地
+- npm run prod 部署
+
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
