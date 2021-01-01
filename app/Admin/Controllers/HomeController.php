@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\Dashboard;
 use Encore\Admin\Layout\Column;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Layout\Row;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -30,5 +31,18 @@ class HomeController extends Controller
                     $column->append(Dashboard::dependencies());
                 });
             });
+    }
+
+    public function upload(Request $request)
+    {
+        $urls = [];
+
+        foreach ($request->file() as $file) {
+            $urls[] = Storage::url($file->store('images', 'admin'));
+        }
+        return [
+            "errno" => 0,
+            "data"  => $urls,
+        ];
     }
 }
