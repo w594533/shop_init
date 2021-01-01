@@ -32,4 +32,11 @@ class ProductsController extends Controller
         $result = $service->disfavor($product);
         return $result;
     }
+
+    public function favorites(Request $request, ProductService $service)
+    {
+        $result = $service->favorites($request);
+
+        return view('products.favorites', $result);
+    }
 }

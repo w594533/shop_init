@@ -10,6 +10,25 @@ class ProductService
     public function index($request)
     {
         $builder = Product::query()->where('on_sale', true);
+
+        $builder = $this->list_query($builder, $request);
+
+        $search = $request->input('search', '');
+        $order = $request->input('order', '');
+
+        $products = $builder->paginate(16);
+
+        return [
+            'products' => $products, 
+            'filters'  => [
+                'search' => $search,
+                'order'  => $order,
+            ]
+        ];
+    }
+
+    public function list_query($builder, $request)
+    {
         if ($search = $request->input('search', '')) {
             $like = '%' . $search . '%';
             // 模糊搜索商品标题、商品详情、SKU 标题、SKU描述
@@ -31,15 +50,7 @@ class ProductService
                 }
             }
         }
-
-        $products = $builder->paginate(16);
-        return [
-            'products' => $products, 
-            'filters'  => [
-                'search' => $search,
-                'order'  => $order,
-            ]
-        ];
+        return $builder;
     }
 
     public function show($product)
@@ -70,5 +81,24 @@ class ProductService
         $user->favoriteProducts()->detach($product);
 
         return [];
+    }
+
+    public function favorites($request)
+    {
+        $user = Auth::user();
+        $builder = $user->favoriteProducts();
+        $builder = $this->list_query($builder, $request);
+        $search = $request->input('search', '');
+        $order = $request->input('order', '');
+
+        $products = $builder->paginate(16);
+
+        return [
+            'products' => $products, 
+            'filters'  => [
+                'search' => $search,
+                'order'  => $order,
+            ]
+        ];
     }
 }
