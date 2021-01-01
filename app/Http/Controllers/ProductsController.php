@@ -14,4 +14,10 @@ class ProductsController extends Controller
 
         return view('products.index', $result);
     }
+
+    public function show(Product $product, ProductService $service)
+    {
+        $result = $service->show($product);
+        return view('products.show', $result);
+    }
 }

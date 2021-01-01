@@ -27,5 +27,6 @@ Route::delete('user_addresses/{user_address}', 'UserAddressesController@destroy'
 
 
 Route::get('products', 'ProductsController@index')->name('products.index');
+Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 
 Auth::routes(['verify' => false]); // 加上了验证邮箱的中间件

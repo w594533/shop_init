@@ -40,4 +40,12 @@ class ProductService
             ]
         ];
     }
+
+    public function show($product)
+    {
+        if (!$product->on_sale) {
+            throw new \Exception('商品未上架');
+        }
+        return ['product' => $product];
+    }
 }
