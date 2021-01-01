@@ -3,6 +3,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\ProductSku;
 use Illuminate\Support\Facades\Auth;
+use App\Exceptions\InvalidRequestException;
 
 class ProductService
 {
@@ -44,7 +45,7 @@ class ProductService
     public function show($product)
     {
         if (!$product->on_sale) {
-            throw new \Exception('商品未上架');
+            throw new InvalidRequestException('商品未上架');
         }
         return ['product' => $product];
     }
