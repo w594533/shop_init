@@ -47,6 +47,28 @@ class ProductService
         if (!$product->on_sale) {
             throw new InvalidRequestException('商品未上架');
         }
-        return ['product' => $product];
+        $favored = false;
+        if (Auth::check()) {
+            $favored = boolval(Auth::user()->favoriteProducts()->find($product->id));
+        }
+        return ['product' => $product, 'favored' =>$favored];
+    }
+
+    public function favor($product)
+    {
+        $user = Auth::user();
+        if ($user->favoriteProducts()->find($product->id)) {
+            return [];
+        }
+        $user->favoriteProducts()->attach($product);
+        return [];
+    }
+
+    public function disfavor($product)
+    {
+        $user = Auth::user();
+        $user->favoriteProducts()->detach($product);
+
+        return [];
     }
 }

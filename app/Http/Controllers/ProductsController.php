@@ -20,4 +20,16 @@ class ProductsController extends Controller
         $result = $service->show($product);
         return view('products.show', $result);
     }
+
+    public function favor(Product $product, ProductService $service)
+    {
+        $result = $service->favor($product);
+        return $result;
+    }
+
+    public function disfavor(Product $product, ProductService $service)
+    {
+        $result = $service->disfavor($product);
+        return $result;
+    }
 }
