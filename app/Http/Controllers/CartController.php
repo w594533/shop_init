@@ -13,4 +13,16 @@ class CartController extends Controller
         $result = $service->add($request);
         return $result;
     }
+
+    public function index(Request $request, CartItemService $service)
+    {
+        $result = $service->index($request);
+        return view('cart.index', $result);
+    }
+
+    public function remove(\App\Models\ProductSku $sku, CartItemService $service)
+    {
+        $result = $service->remove($sku);
+        return $result;
+    }
 }

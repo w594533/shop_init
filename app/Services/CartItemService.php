@@ -23,4 +23,19 @@ class CartItemService
         }
         return [];
     }
+
+    public function index($request)
+    {
+        $user = Auth::user();
+
+        $cartItems = $user->cartItems()->with(['productSku.product'])->get();
+        return ['cartItems' => $cartItems];
+    }
+
+    public function remove($sku)
+    {
+        $user = Auth::user();
+        $user->cartItems()->where('product_sku_id', $sku->id)->delete();
+        return [];
+    }
 }
