@@ -29,7 +29,8 @@ class CartItemService
         $user = Auth::user();
 
         $cartItems = $user->cartItems()->with(['productSku.product'])->get();
-        return ['cartItems' => $cartItems];
+        $addresses = $user->addresses()->orderBy('last_used_at', 'desc')->get();
+        return ['cartItems' => $cartItems, 'addresses' => $addresses];
     }
 
     public function remove($sku)

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
+/*!
  * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
@@ -15511,11 +15511,6 @@ a.text-dark:focus {
   }
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-
 /* universal */
 
 body {
@@ -15666,8 +15661,6 @@ body {
   margin-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
-
-/**product show**/
 
 .products-show-page .cover {
   width: 100%;
@@ -15854,5 +15847,249 @@ body {
 .cart-index-page .product_list input.amount {
   width: 60px;
   border-radius: 0 !important;
+}
+
+.orders-index-page .list-group-item {
+  font-size: 12px;
+  border: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.orders-index-page .list-group-item .panel {
+  margin: 0;
+}
+
+.orders-index-page .list-group-item .panel .card-body {
+  padding: 0;
+}
+
+.orders-index-page .list-group-item .table {
+  margin: 0;
+}
+
+.orders-index-page .list-group-item .table td[rowspan] {
+  border-left: 1px solid #ddd;
+}
+
+.orders-index-page .list-group-item .product-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.orders-index-page .list-group-item .product-info .preview {
+  border: 1px solid #eee;
+  margin-right: 5px;
+}
+
+.orders-index-page .list-group-item .product-info .preview img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.orders-index-page .list-group-item .product-info .product-title,
+.orders-index-page .list-group-item .product-info .sku-title {
+  display: block;
+}
+
+.orders-index-page .list-group-item .product-info .product-title > a {
+  color: #3c3c3c;
+}
+
+.orders-index-page .list-group-item .product-info .sku-title {
+  color: #9e9e9e;
+}
+
+.orders-index-page .list-group-item .total-amount {
+  font-weight: bolder;
+}
+
+.orders-show-page {
+  font-size: 12px;
+}
+
+.orders-show-page .vertical-middle {
+  vertical-align: middle;
+}
+
+.orders-show-page .product-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.orders-show-page .product-info .preview {
+  border: 1px solid #eee;
+  margin-right: 5px;
+}
+
+.orders-show-page .product-info .preview img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.orders-show-page .product-info .product-title,
+.orders-show-page .product-info .sku-title {
+  display: block;
+}
+
+.orders-show-page .product-info .product-title > a {
+  color: #3c3c3c;
+}
+
+.orders-show-page .product-info .sku-title {
+  color: #9e9e9e;
+}
+
+.orders-show-page .table {
+  margin-bottom: 0;
+}
+
+.orders-show-page .item-amount {
+  padding-right: 20px;
+  width: 200px;
+}
+
+.orders-show-page .order-bottom {
+  display: flex;
+  flex-direction: row;
+}
+
+.orders-show-page .order-info {
+  width: 50%;
+  border-right: 1px solid #ddd;
+}
+
+.orders-show-page .order-info .line {
+  display: flex;
+  flex-direction: row;
+}
+
+.orders-show-page .order-info .line .line-label {
+  width: 80px;
+  text-align: right;
+}
+
+.orders-show-page .order-info .line .line-value {
+  flex-shrink: 100;
+}
+
+.orders-show-page .order-summary {
+  width: 50%;
+  font-family: Verdana, Tahoma, Helvetica, Arial;
+}
+
+.orders-show-page .order-summary .total-amount {
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.orders-show-page .order-summary .value {
+  display: inline-block;
+  width: 150px;
+  padding-right: 20px;
+}
+
+.orders-show-page .payment-buttons,
+.orders-show-page .receive-button,
+.orders-show-page .refund-button {
+  margin-top: 10px;
+  padding-right: 10px;
+}
+
+.orders-review-show-page .vertical-middle {
+  vertical-align: middle;
+}
+
+.orders-review-show-page .product-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.orders-review-show-page .product-info .preview {
+  border: 1px solid #eee;
+  margin-right: 5px;
+}
+
+.orders-review-show-page .product-info .preview img {
+  max-width: 60px;
+  max-height: 60px;
+}
+
+.orders-review-show-page .product-info .product-title,
+.orders-review-show-page .product-info .sku-title {
+  display: block;
+}
+
+.orders-review-show-page .product-info .product-title > a {
+  color: #3c3c3c;
+}
+
+.orders-review-show-page .product-info .sku-title {
+  color: #9e9e9e;
+}
+
+.orders-review-show-page .rating-star-yes {
+  color: gold;
+  font-size: 150%;
+}
+
+.orders-review-show-page .rating-star-no {
+  color: lightgrey;
+  font-size: 150%;
+}
+
+.orders-review-show-page .rate-area {
+  float: left;
+  border-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.orders-review-show-page .rate-area:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.orders-review-show-page .rate-area:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: 1.2;
+  color: lightgrey;
+  font-size: 150%;
+}
+
+.orders-review-show-page .rate-area:not(:checked) > label:before {
+  content: "\2605   ";
+}
+
+.orders-review-show-page .rate-area:not(:checked) > label:hover,
+.orders-review-show-page .rate-area:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+
+.orders-review-show-page .rate-area > input:checked ~ label {
+  color: gold;
+}
+
+.orders-review-show-page .rate-area > label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+
+.orders-review-show-page .rate-area > input:checked + label:hover,
+.orders-review-show-page .rate-area > input:checked + label:hover ~ label,
+.orders-review-show-page .rate-area > input:checked ~ label:hover,
+.orders-review-show-page .rate-area > input:checked ~ label:hover ~ label,
+.orders-review-show-page .rate-area > label:hover ~ input:checked ~ label {
+  color: gold;
+}
+
+.orders-review-show-page textarea {
+  border-radius: 0px;
 }
 
