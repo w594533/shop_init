@@ -16,8 +16,10 @@
         "laravel/tinker": "^1.0",
         "overtrue/easy-sms": "^1.2",
         "overtrue/laravel-lang": "~3.0",
+        "predis/predis": "^1.1",
         "rap2hpoutre/laravel-log-viewer": "^1.7",
-        "yansongda/laravel-pay": "^2.3"
+        "yansongda/laravel-pay": "^2.3",
+        "yansongda/pay": "^2.10"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -63,7 +63,7 @@ class OrderService
             $sku_ids = collect($request->input('items'))->pluck('sku_id');
             $user->cartItems()->whereIn('product_sku_id', $sku_ids)->delete();
 
-            // CloseOrder::dispatch($order, 30); //秒
+            dispatch(new CloseOrder($order, 1800));//秒
             return $order;
         });
         return $order;
