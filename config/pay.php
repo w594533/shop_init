@@ -56,10 +56,10 @@ return [
         'key' => env('WECHAT_KEY', ''),
 
         // 客户端证书路径，退款、红包等需要用到。请填写绝对路径，linux 请确保权限问题。pem 格式。
-        'cert_client' => '',
+        'cert_client' => resource_path('wechat_pay/apiclient_cert.pem'),
 
         // 客户端秘钥路径，退款、红包等需要用到。请填写绝对路径，linux 请确保权限问题。pem 格式。
-        'cert_key' => '',
+        'cert_key' => resource_path('wechat_pay/apiclient_key.pem'),
 
         // optional，默认 warning；日志路径为：sys_get_temp_dir().'/logs/yansongda.pay.log'
         'log' => [
