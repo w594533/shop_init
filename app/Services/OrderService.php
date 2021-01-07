@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\Order;
 use App\Models\UserAddress;
 use Carbon\Carbon;
+use App\Jobs\CloseOrder;
 
 class OrderService
 {
@@ -62,8 +63,22 @@ class OrderService
             $sku_ids = collect($request->input('items'))->pluck('sku_id');
             $user->cartItems()->whereIn('product_sku_id', $sku_ids)->delete();
 
+            // CloseOrder::dispatch($order, 30); //秒
             return $order;
         });
         return $order;
+    }
+
+    public function index($request)
+    {
+        $user = Auth::user();
+
+        $orders = Order::query()
+            // 使用 with 方法预加载，避免N + 1问题
+            ->with(['items.product', 'items.productSku'])
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+        return ['orders' => $orders];
     }
 }
