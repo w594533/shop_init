@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('payment/{order}/alipay', 'PaymentController@payByAlipay')->name('payment.alipay');
     Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
+    Route::get('payment/{order}/wechat', 'PaymentController@payByWechat')->name('payment.wechat');
 });
 
 Route::get('products', 'ProductsController@index')->name('products.index');
@@ -54,3 +55,4 @@ Route::get('products/{product}', 'ProductsController@show')->name('products.show
 Auth::routes(['verify' => false]); // 加上了验证邮箱的中间件
 
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
+Route::post('payment/wechat/notify', 'PaymentController@wechatNotify')->name('payment.wechat.notify');
