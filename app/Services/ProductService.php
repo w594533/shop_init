@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Models\Product;
 use App\Models\ProductSku;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use App\Exceptions\InvalidRequestException;
 
@@ -62,7 +63,16 @@ class ProductService
         if (Auth::check()) {
             $favored = boolval(Auth::user()->favoriteProducts()->find($product->id));
         }
-        return ['product' => $product, 'favored' =>$favored];
+
+        $reviews = OrderItem::query()
+            ->with(['order.user', 'productSku']) // 预先加载关联关系
+            ->where('product_id', $product->id)
+            ->whereNotNull('reviewed_at') // 筛选出已评价的
+            ->orderBy('reviewed_at', 'desc') // 按评价时间倒序
+            ->limit(10) // 取出 10 条
+            ->get();
+
+        return ['product' => $product, 'favored' =>$favored, 'reviews' => $reviews];
     }
 
     public function favor($product)

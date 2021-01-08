@@ -11,6 +11,20 @@ DB_PORT=3306
 DB_DATABASE=Your database
 DB_USERNAME=Your database username
 DB_PASSWORD=Your database password
+
+#队列名称
+REDIS_QUEUE=
+
+#支付
+ALI_APP_ID=
+ALI_PUBLIC_KEY=
+ALI_PRIVATE_KEY=
+
+WECHAT_APP_ID=
+WECHAT_MINIAPP_ID=
+WECHAT_APPID=
+WECHAT_MCH_ID=
+WECHAT_KEY=
 ```
 
 ## 前端配置

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Services\OrderService;
 use App\Models\Order;
+use Carbon\Carbon;
+use App\Http\Requests\SendReviewRequest;
 
 class OrdersController extends Controller
 {
@@ -26,5 +28,27 @@ class OrdersController extends Controller
         $this->authorize('own', $order);
         
         return view('orders.show', ['order' => $order->load(['items.productSku', 'items.product'])]);
+    }
+
+    public function received(Order $order, Request $request, OrderService $service)
+    {
+        $result = $service->received($order, $request);
+
+        // 返回原页面
+        return $result;
+    }
+
+    public function review(Order $order, OrderService $service)
+    {
+        $result = $service->review($order);
+        // 使用 load 方法加载关联数据，避免 N + 1 性能问题
+        return view('orders.review', $result);
+    }
+
+    public function sendReview(Order $order, SendReviewRequest $request, OrderService $service)
+    {
+        $result = $service->sendReview($order, $request);
+
+        return redirect()->back();
     }
 }

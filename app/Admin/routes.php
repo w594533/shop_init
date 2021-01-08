@@ -16,4 +16,8 @@ Route::group([
     $router->resource('users', UsersController::class);
     $router->resource('products', ProductsController::class, ['except' => ['show']]);
 
+    $router->resource('orders', OrdersController::class, ['except' => ['show']]);
+    $router->get('orders/{order}', 'OrdersController@show')->name('orders.show');
+    $router->post('orders/{order}/ship', 'OrdersController@ship')->name('orders.ship');
+
 });
