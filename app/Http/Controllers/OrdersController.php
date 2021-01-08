@@ -8,6 +8,7 @@ use App\Services\OrderService;
 use App\Models\Order;
 use Carbon\Carbon;
 use App\Http\Requests\SendReviewRequest;
+use App\Http\Requests\ApplyRefundRequest;
 
 class OrdersController extends Controller
 {
@@ -50,5 +51,12 @@ class OrdersController extends Controller
         $result = $service->sendReview($order, $request);
 
         return redirect()->back();
+    }
+
+    public function applyRefund(Order $order, ApplyRefundRequest $request, OrderService $service)
+    {
+        $result = $service->applyRefund($order, $request);
+
+        return $result;
     }
 }
