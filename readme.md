@@ -27,6 +27,12 @@ WECHAT_MCH_ID=
 WECHAT_KEY=
 ```
 
+## 数据库&假数据填充
+```
+php artisan migrate(第一次数据脚本) / php artisan migrate:fresh(重新生成sql脚本)
+php artisan db:seed(填充假数据)
+php artisan admin:create-user（生成一个admin 用户）
+```
 ## 前端配置
 [首先参考链接](https://learnku.com/articles/13277/in-learning-lessons-there-are-always-craters-recording-solutions)
 

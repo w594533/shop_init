@@ -34,7 +34,7 @@ class OrderService
         // 如果传入了优惠券，则先检查是否可用
         if ($coupon) {
             // 但此时我们还没有计算出订单总金额，因此先不校验
-            $coupon->checkAvailable();
+            $coupon->checkAvailable($user);
         }
 
         $order = \DB::transaction(function () use ($user, $request, $coupon) {
@@ -78,7 +78,7 @@ class OrderService
             }
             if ($coupon) {
                 // 总金额已经计算出来了，检查是否符合优惠券规则
-                $coupon->checkAvailable($total_amount);
+                $coupon->checkAvailable($user, $total_amount);
                 // 把订单金额修改为优惠后的金额
                 $totalAmount = $coupon->getAdjustedPrice($total_amount);
                 // 将订单与优惠券关联
@@ -95,7 +95,7 @@ class OrderService
             $sku_ids = collect($request->input('items'))->pluck('sku_id');
             $user->cartItems()->whereIn('product_sku_id', $sku_ids)->delete();
 
-            dispatch(new CloseOrder($order, 1800));//秒
+            // dispatch(new CloseOrder($order, 1800));//秒
             return $order;
         });
         return $order;
