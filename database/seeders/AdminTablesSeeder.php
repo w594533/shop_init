@@ -105,6 +105,22 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-tags",
                     "uri" => "/coupon_codes",
                     "permission" => NULL
+                ],
+                [
+                    "parent_id" => 0,
+                    "order" => 12,
+                    "title" => "类目管理",
+                    "icon" => "fa-bars",
+                    "uri" => "/categories",
+                    "permission" => NULL
+                ],
+                [
+                    "parent_id" => 0,
+                    "order" => 12,
+                    "title" => "类目管理",
+                    "icon" => "fa-bars",
+                    "uri" => "/categories",
+                    "permission" => NULL
                 ]
             ]
         );

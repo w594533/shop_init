@@ -5,6 +5,8 @@ use App\Models\ProductSku;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use App\Exceptions\InvalidRequestException;
+use App\Services\CategoryService;
+use App\Models\Category;
 
 class ProductService
 {
@@ -16,11 +18,17 @@ class ProductService
 
         $search = $request->input('search', '');
         $order = $request->input('order', '');
+        $category = null;
+        if ($request->input('category_id')) {
+            $category = Category::find($request->input('category_id'));
+        }
 
         $products = $builder->paginate(16);
 
         return [
             'products' => $products, 
+            'category' => $category,
+            'categoryTree' => (new CategoryService())->getCategoryTree(),
             'filters'  => [
                 'search' => $search,
                 'order'  => $order,
@@ -47,8 +55,23 @@ class ProductService
                 // 如果字符串的开头是这 3 个字符串之一，说明是一个合法的排序值
                 if (in_array($m[1], ['price', 'sold_count', 'rating'])) {
                     // 根据传入的排序值来构造排序参数
-                    $builder->orderBy($m[1], $m[2]);
+                    $builder = $builder->orderBy($m[1], $m[2]);
                 }
+            }
+        }
+
+        // 如果有传入 category_id 字段，并且在数据库中有对应的类目
+        if ($request->input('category_id') && $category = Category::find($request->input('category_id'))) {
+            // 如果这是一个父类目
+            if ($category->is_directory) {
+                // 则筛选出该父类目下所有子类目的商品
+                $builder = $builder->whereHas('category', function ($query) use ($category) {
+                    // 这里的逻辑参考本章第一节
+                    $query->where('path', 'like', $category->path.$category->id.'-%');
+                });
+            } else {
+                // 如果这不是一个父类目，则直接筛选此类目下的商品
+                $builder = $builder->where('category_id', $category->id);
             }
         }
         return $builder;
