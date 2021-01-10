@@ -18,6 +18,11 @@ class Product extends Model
         return $this->hasMany(ProductSku::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function getImageUrlAttribute()
     {
         if (Str::startsWith($this->attributes['image'], ['http://', 'https://'])) {
