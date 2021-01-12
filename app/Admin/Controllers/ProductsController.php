@@ -9,7 +9,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ProductsController extends AdminController
+class ProductsController extends CommonProductsController
 {
     /**
      * Title for current resource.
@@ -18,44 +18,36 @@ class ProductsController extends AdminController
      */
     protected $title = '商品';
 
+    public function getProductType()
+    {
+        return Product::TYPE_NORMAL;
+    }
+
     /**
      * Make a grid builder.
      *
      * @return Grid
      */
-    protected function grid()
+    protected function customGrid(Grid $grid)
     {
-        $grid = new Grid(new Product);
-        $grid->model()->where('type', Product::TYPE_NORMAL)->with(['category']);
-
+        $grid->model()->with(['category']);
         $grid->id('ID')->sortable();
         $grid->title('商品名称');
-        // Laravel-Admin 支持用符号 . 来展示关联关系的字段
         $grid->column('category.name', '类目');
-        // $grid->column('description', __('Description'));
-        // $grid->column('image', __('Image'));
-        $grid->column('on_sale', '已上架')->display(function ($value) {
+        $grid->on_sale('已上架')->display(function ($value) {
             return $value ? '是' : '否';
         });
-        $grid->column('price', '价格');
-        $grid->column('rating', '评分');
-        $grid->column('sold_count', '销量');
-        $grid->column('review_count', '评论数');
-        
-        $grid->actions(function ($actions) {
-            $actions->disableView();
-            $actions->disableDelete();
-        });
-        $grid->tools(function ($tools) {
-            // 禁用批量删除按钮
-            $tools->batch(function ($batch) {
-                $batch->disableDelete();
-            });
-        });
-
-        return $grid;
+        $grid->price('价格');
+        $grid->rating('评分');
+        $grid->sold_count('销量');
+        $grid->review_count('评论数');
     }
 
+    protected function customForm(Form $form)
+    {
+        // 普通商品没有额外的字段，因此这里不需要写任何代码
+    }
+    
     /**
      * Make a show builder.
      *
