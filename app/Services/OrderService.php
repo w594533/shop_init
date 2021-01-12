@@ -49,6 +49,7 @@ class OrderService
                     'contact_name'  => $address->contact_name,
                     'contact_phone' => $address->contact_phone,
                 ],
+                'type' => Order::TYPE_NORMAL,
                 'remark' => $request->input('remark', ''),
                 'total_amount' => 0
             ]);
@@ -191,6 +192,9 @@ class OrderService
         if (!$order->paid_at) {
             throw new InvalidRequestException('该订单未支付，不可退款');
         }
+        if ($order->type === Order::TYPE_CROWDFUNDING) {
+            throw new InvalidRequestException('众筹订单不支持退款');
+        }
         // 判断订单退款状态是否正确
         if ($order->refund_status !== Order::REFUND_STATUS_PENDING) {
             throw new InvalidRequestException('该订单已经申请过退款，请勿重复申请');
@@ -230,6 +234,7 @@ class OrderService
                 ],
                 'remark'       => '',
                 'total_amount' => $sku->price * $amount,
+                'type' => Order::TYPE_CROWDFUNDING,
             ]);
             // 订单关联到当前用户
             $order->user()->associate($user);
