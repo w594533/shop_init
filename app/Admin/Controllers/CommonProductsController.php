@@ -51,7 +51,7 @@ abstract class CommonProductsController extends AdminController
             }
         })->ajax('/admin/api/categories?is_directory=0');
         $form->image('image', '封面图片')->rules('required|image');
-        $form->quill('description', '商品描述')->rules('required');
+        $form->editor('description', '商品描述')->rules('required');
         $form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default('0');
 
         // 调用自定义方法

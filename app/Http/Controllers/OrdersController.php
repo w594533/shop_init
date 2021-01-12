@@ -59,4 +59,12 @@ class OrdersController extends Controller
 
         return $result;
     }
+
+    // 创建一个新的方法用于接受众筹商品下单请求
+    public function crowdfunding(CrowdFundingOrderRequest $request, OrderService $service)
+    {
+        $result = $service->crowdfunding($request);
+
+        return $result;
+    }
 }
