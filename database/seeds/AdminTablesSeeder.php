@@ -84,12 +84,12 @@ class AdminTablesSeeder extends Seeder
                     "order" => 9,
                     "title" => "商品管理",
                     "icon" => "fa-cubes",
-                    "uri" => "/products",
+                    "uri" => NULL,
                     "permission" => NULL
                 ],
                 [
                     "parent_id" => 0,
-                    "order" => 10,
+                    "order" => 12,
                     "title" => "订单管理",
                     "icon" => "fa-rmb",
                     "uri" => "/orders",
@@ -97,7 +97,7 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 0,
-                    "order" => 11,
+                    "order" => 13,
                     "title" => "优惠券",
                     "icon" => "fa-tags",
                     "uri" => "/coupon_codes",
@@ -105,10 +105,26 @@ class AdminTablesSeeder extends Seeder
                 ],
                 [
                     "parent_id" => 0,
-                    "order" => 12,
+                    "order" => 14,
                     "title" => "类目管理",
                     "icon" => "fa-bars",
                     "uri" => "/categories",
+                    "permission" => NULL
+                ],
+                [
+                    "parent_id" => 9,
+                    "order" => 10,
+                    "title" => "普通商品",
+                    "icon" => "fa-cubes",
+                    "uri" => "/products",
+                    "permission" => NULL
+                ],
+                [
+                    "parent_id" => 9,
+                    "order" => 11,
+                    "title" => "众筹商品",
+                    "icon" => "fa-flag-checkered",
+                    "uri" => "/crowdfunding_products",
                     "permission" => NULL
                 ]
             ]
