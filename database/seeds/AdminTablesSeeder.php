@@ -126,6 +126,14 @@ class AdminTablesSeeder extends Seeder
                     "icon" => "fa-flag-checkered",
                     "uri" => "/crowdfunding_products",
                     "permission" => NULL
+                ],
+                [
+                    "parent_id" => 9,
+                    "order" => 12,
+                    "title" => "秒杀商品",
+                    "icon" => "fa-bolt",
+                    "uri" => "/seckill_products",
+                    "permission" => NULL
                 ]
             ]
         );

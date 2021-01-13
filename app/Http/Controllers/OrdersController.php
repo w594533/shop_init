@@ -9,12 +9,19 @@ use App\Models\Order;
 use Carbon\Carbon;
 use App\Http\Requests\SendReviewRequest;
 use App\Http\Requests\ApplyRefundRequest;
-
+use App\Http\Requests\SeckillOrderRequest;
 class OrdersController extends Controller
 {
     public function store(OrderRequest $request, OrderService $service)
     {
         $result = $service->store($request);
+        return $result;
+    }
+
+    public function seckill(SeckillOrderRequest $request, OrderService $service)
+    {
+        $result = $service->seckill($request);
+
         return $result;
     }
 
