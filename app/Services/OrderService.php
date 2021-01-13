@@ -82,7 +82,7 @@ class OrderService
                 // 总金额已经计算出来了，检查是否符合优惠券规则
                 $coupon->checkAvailable($user, $total_amount);
                 // 把订单金额修改为优惠后的金额
-                $totalAmount = $coupon->getAdjustedPrice($total_amount);
+                $total_amount = $coupon->getAdjustedPrice($total_amount);
                 // 将订单与优惠券关联
                 $order->couponCode()->associate($coupon);
                 // 增加优惠券的用量，需判断返回值
@@ -92,7 +92,7 @@ class OrderService
             }
 
             // 更新订单总金额
-            $order->update(['total_amount' => $totalAmount]);
+            $order->update(['total_amount' => $total_amount]);
 
             $sku_ids = collect($request->input('items'))->pluck('sku_id');
             $user->cartItems()->whereIn('product_sku_id', $sku_ids)->delete();

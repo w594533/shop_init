@@ -14,6 +14,7 @@
         "laravel-admin-ext/wang-editor": "1.*",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "moontoast/math": "^1.2",
         "overtrue/easy-sms": "^1.2",
         "overtrue/laravel-lang": "~3.0",
         "predis/predis": "^1.1",
