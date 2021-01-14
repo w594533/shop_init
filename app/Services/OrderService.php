@@ -109,24 +109,25 @@ class OrderService
         $user = Auth::user();
 
         $order = \DB::transaction(function () use ($request, $user) {
-            
+            $addressData = $request->input('address');
+
             $sku     = ProductSku::find($request->input('sku_id'));
 
-            $address = UserAddress::find($request->address_id);
+            // $address = UserAddress::find($request->address_id);
 
             // 更新此地址的最后使用时间
-            $address->update(['last_used_at' => Carbon::now()]);
+            // $address->update(['last_used_at' => Carbon::now()]);
             // 扣减对应 SKU 库存
             if ($sku->decreaseStock(1) <= 0) {
                 throw new InvalidRequestException('该商品库存不足');
             }
             // 创建一个订单
             $order = new Order([
-                'address'      => [ // 将地址信息放入订单中
-                    'address'       => $address->full_address,
-                    'zip'           => $address->zip,
-                    'contact_name'  => $address->contact_name,
-                    'contact_phone' => $address->contact_phone,
+                'address'      => [ // address 字段直接从 $addressData 数组中读取
+                    'address'       => $addressData['province'].$addressData['city'].$addressData['district'].$addressData['address'],
+                    'zip'           => $addressData['zip'],
+                    'contact_name'  => $addressData['contact_name'],
+                    'contact_phone' => $addressData['contact_phone'],
                 ],
                 'remark'       => '',
                 'total_amount' => $sku->price,
@@ -145,6 +146,7 @@ class OrderService
             $item->productSku()->associate($sku);
             $item->save();
 
+            \Redis::decr('seckill_sku_'.$sku->id);
             return $order;
         });
         // 秒杀订单的自动关闭时间与普通订单不同
